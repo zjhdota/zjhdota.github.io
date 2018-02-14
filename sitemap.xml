@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/02/14/CentOS7%20%E9%83%A8%E7%BD%B2Redis/</loc>
+    
+    <lastmod>2018-02-14T12:17:33.139Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/02/14/CentOS7%20%E9%83%A8%E7%BD%B2MySQL/</loc>
     
-    <lastmod>2018-02-14T10:51:22.978Z</lastmod>
+    <lastmod>2018-02-14T12:15:56.861Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/02/14/%E5%88%86%E5%B8%83%E5%BC%8F%E9%83%A8%E7%BD%B2Pyspider/</loc>
+    
+    <lastmod>2018-02-14T11:37:54.226Z</lastmod>
     
   </url>
   
@@ -12,20 +26,6 @@
     <loc>http://yoursite.com/2017/03/14/hexo1/</loc>
     
     <lastmod>2018-02-14T10:47:47.530Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/03/13/kali-linux-configuration/</loc>
-    
-    <lastmod>2017-09-13T22:06:04.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/05/05/python-%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95pixiv/</loc>
-    
-    <lastmod>2017-09-13T22:06:04.000Z</lastmod>
     
   </url>
   
@@ -44,14 +44,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/2017/05/03/python%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E6%9A%B4%E8%B5%B0%E6%BC%AB%E7%94%BB%E5%AE%98%E7%BD%91GIF%E5%9B%BE/</loc>
     
     <lastmod>2017-09-13T22:06:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/06/24/selenium-%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95163/</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-09-13T22:06:04.000Z</lastmod>
     
@@ -79,6 +79,20 @@
   </url>
   
   <url>
+    <loc>http://yoursite.com/2017/03/13/kali-linux-configuration/</loc>
+    
+    <lastmod>2017-09-13T22:06:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/05/05/python-%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95pixiv/</loc>
+    
+    <lastmod>2017-09-13T22:06:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2017-09-13T22:06:04.000Z</lastmod>
@@ -86,7 +100,7 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/05/03/python%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E6%9A%B4%E8%B5%B0%E6%BC%AB%E7%94%BB%E5%AE%98%E7%BD%91GIF%E5%9B%BE/</loc>
+    <loc>http://yoursite.com/2017/06/24/selenium-%E6%A8%A1%E6%8B%9F%E7%99%BB%E5%BD%95163/</loc>
     
     <lastmod>2017-09-13T22:06:04.000Z</lastmod>
     
