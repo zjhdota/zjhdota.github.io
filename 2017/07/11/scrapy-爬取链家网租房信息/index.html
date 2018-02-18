@@ -1,365 +1,112 @@
-<!doctype html>
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
 
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="MySQL,Python,爬虫,scrapy,链家网," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。 本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 装好后输入1# scrapy 出现如下图结果：附上scrapy 中文使用">
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>scrapy 爬取链家网租房信息 | Nameless</title>
+  <meta name="description" content="If you want something you've never had, then you've got to do something you've never done." />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。  本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 附上scrapy 中文使用手册便于使用 初步了解scrapyscrap">
 <meta name="keywords" content="MySQL,Python,爬虫,scrapy,链家网">
 <meta property="og:type" content="article">
 <meta property="og:title" content="scrapy 爬取链家网租房信息">
 <meta property="og:url" content="http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/index.html">
 <meta property="og:site_name" content="Nameless">
-<meta property="og:description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。 本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 装好后输入1# scrapy 出现如下图结果：附上scrapy 中文使用">
+<meta property="og:description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。  本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 附上scrapy 中文使用手册便于使用 初步了解scrapyscrap">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/scrapy.png">
 <meta property="og:image" content="http://yoursite.com/images/scrapy2.png">
 <meta property="og:image" content="http://yoursite.com/images/scrapy3.png">
-<meta property="og:updated_time" content="2017-09-13T22:06:04.000Z">
+<meta property="og:updated_time" content="2018-02-18T03:02:16.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="scrapy 爬取链家网租房信息">
-<meta name="twitter:description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。 本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 装好后输入1# scrapy 出现如下图结果：附上scrapy 中文使用">
-<meta name="twitter:image" content="http://yoursite.com/images/scrapy.png">
+<meta name="twitter:description" content="本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。  本机主要运行环境 Arch Linux scrapy MySQL Python3.6  安装scrapy为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.1# pip install Scrapy 附上scrapy 中文使用手册便于使用 初步了解scrapyscrap">
+<meta name="twitter:image" content="http://yoursite.com/images/scrapy2.png">
+  <!-- build:css css/screen.css -->
 
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/"/>
-
-
-
-
-
-  <title> scrapy 爬取链家网租房信息 | Nameless </title>
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+  <!-- endbuild -->
+  
+  <!-- build:css fancybox/jquery.fancybox.css -->
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="Nameless">
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
+<body class="post-template">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/atom.xml">Subscribe</a>
+    </nav>
     
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Nameless</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">If you want something you've never had, then you've got to do something you've never done.</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
 
   
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-    </ul>
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">scrapy 爬取链家网租房信息</h1>
+      <section class="post-meta">
+  <time datetime="2017-07-11T00:43:08.000Z" itemprop="datePublished" class="post-date">
+      2017-07-11
+  </time>
   
-
   
-</nav>
+  on 
+  <a href='/tags/MySQL/'>MySQL</a>,
+  
+  <a href='/tags/Python/'>Python</a>,
+  
+  <a href='/tags/爬虫/'>爬虫</a>,
+  
+  <a href='/tags/scrapy/'>scrapy</a>,
+  
+  <a href='/tags/链家网/'>链家网</a>
+  
+  
+</section>
 
-
-
- </div>
     </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="The One">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nameless">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                scrapy 爬取链家网租房信息
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T08:43:08+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">Python 爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
+    <section class="post-content" itemprop="description articleBody">
       
 
       
-        <p>本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。</p>
-<h1 id="本机主要运行环境"><a href="#本机主要运行环境" class="headerlink" title="本机主要运行环境"></a>本机主要运行环境</h1><ul>
+      <section class="post-updated">
+  Last updated on <time datetime="2018-02-18T03:02:16.484Z" itemprop="dateModified">
+      2018-02-18
+  </time>
+</section>
+
+      
+      <p>本文主要记录学习使用scrapy来获取链家网中北京地区的租房信息，并将获取到的信息存储到MySQL数据库的过程。</p>
+<hr>
+<h4 id="本机主要运行环境"><a href="#本机主要运行环境" class="headerlink" title="本机主要运行环境"></a>本机主要运行环境</h4><ul>
 <li>Arch Linux</li>
 <li>scrapy</li>
 <li>MySQL</li>
 <li>Python3.6</li>
 </ul>
-<h1 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h1><p>为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pip install Scrapy</span></span><br></pre></td></tr></table></figure></p>
-<p>装好后输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> scrapy</span></span><br></pre></td></tr></table></figure></p>
-<p>出现如下图结果：<br><img src="/images/scrapy.png" alt=""><br>附上<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/intro/tutorial.html" target="_blank" rel="noopener">scrapy 中文使用手册</a>便于使用</p>
-<h1 id="初步了解scrapy"><a href="#初步了解scrapy" class="headerlink" title="初步了解scrapy"></a>初步了解scrapy</h1><p>scrapy 目录结构:<br><img src="/images/scrapy2.png" alt=""></p>
+<h4 id="安装scrapy"><a href="#安装scrapy" class="headerlink" title="安装scrapy"></a>安装scrapy</h4><p>为了方便安装,以及解决依赖问题,我们选择用pip安装scrapy.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> pip install Scrapy</span></span><br></pre></td></tr></table></figure></p>
+<p>附上<a href="http://scrapy-chs.readthedocs.io/zh_CN/0.24/intro/tutorial.html" target="_blank" rel="noopener">scrapy 中文使用手册</a>便于使用</p>
+<h4 id="初步了解scrapy"><a href="#初步了解scrapy" class="headerlink" title="初步了解scrapy"></a>初步了解scrapy</h4><p>scrapy 目录结构:<br><img src="/images/scrapy2.png" alt=""></p>
 <p>文件简要说明:</p>
 <ul>
 <li>scrapy.cfg: 项目的配置文件,用于配置项目名称、URL等属性</li>
@@ -370,7 +117,7 @@
 <li>LianjiaSpider/middlewares.py 项目中间件的配置。例，配置ip池或者UA池</li>
 <li>LianjiaSpider/spiders/: 放置爬虫代码的目录.</li>
 </ul>
-<h1 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h1><p>先创建个scrapy工程,命令行输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> scrapy startproject LianjiaSpider</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="编写爬虫"><a href="#编写爬虫" class="headerlink" title="编写爬虫"></a>编写爬虫</h4><p>先创建个scrapy工程,命令行输入<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> scrapy startproject LianjiaSpider</span></span><br></pre></td></tr></table></figure></p>
 <p>我们在spiders目录下,新建个爬虫文件叫LianjiaSpider.py<br>在这个爬虫文件中，爬虫必须继承scrapy.Spider这个爬虫类<br>此外还必须定义如下三个属性</p>
 <ol>
 <li>name:定义爬虫名字</li>
@@ -382,7 +129,7 @@
 <p>pipelines.py<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define your item pipelines here</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Don't forget to add your pipeline to the ITEM_PIPELINES setting</span></span><br><span class="line"><span class="comment"># See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html</span></span><br><span class="line">import MySQLdb</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LianjiaspiderPipeline</span>(<span class="title">object</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">open_spider</span><span class="params">(<span class="keyword">self</span>, spider)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">self</span>.con = MySQLdb.connect(<span class="string">'localhost'</span>, <span class="string">'root'</span>, <span class="string">'密码'</span>, <span class="string">'数据库名字'</span>)</span><br><span class="line">        <span class="keyword">self</span>.cursor = <span class="keyword">self</span>.con.cursor()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_item</span><span class="params">(<span class="keyword">self</span>, item, spider)</span></span><span class="symbol">:</span></span><br><span class="line">        insert_sql = <span class="string">"INSERT INTO lianjia(TITLE, LOCATION, ZONE, METERS, DIRECTION, MONEY) VALUES ('&#123;&#125;', '&#123;&#125;', '&#123;&#125;', '&#123;&#125;', '&#123;&#125;', '&#123;&#125;')"</span>.format(item[<span class="string">'title'</span>], item[<span class="string">'location'</span>], item[<span class="string">'zone'</span>], item[<span class="string">'meters'</span>], item[<span class="string">'direction'</span>], item[<span class="string">'money'</span>])</span><br><span class="line">        <span class="keyword">self</span>.cursor.execute(insert_sql) <span class="comment"># 执行sql语句</span></span><br><span class="line">        <span class="keyword">self</span>.con.commit() <span class="comment"># 提交到数据库，insert和updata语句必须执行这句</span></span><br><span class="line">        <span class="keyword">return</span> item</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">spider_close</span><span class="params">(<span class="keyword">self</span>, spider)</span></span><span class="symbol">:</span></span><br><span class="line">        <span class="keyword">self</span>.con.close()</span><br></pre></td></tr></table></figure></p>
 <p>在项目配置文件settings.py中添加如下代码<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   'LianjiaSpider.pipelines.LianjiaspiderPipeline': 300,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>注意：<br>因为scrapy爬虫在请求URL的时候会遵循robots.txt中的协议，恰恰链家网中robots.txt是禁止爬虫爬取根目录的，所以我们要在项目配置文件settings.py中配置<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ROBOTSTXT_OBEY</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure></p>
-<h1 id="优化爬虫"><a href="#优化爬虫" class="headerlink" title="优化爬虫"></a>优化爬虫</h1><p>为了使我们的爬虫能够顺利的进行，并且尽量使目标网站不会封禁我们的IP，我们需要如下几种方法去配置爬虫</p>
+<h4 id="优化爬虫"><a href="#优化爬虫" class="headerlink" title="优化爬虫"></a>优化爬虫</h4><p>为了使我们的爬虫能够顺利的进行，并且尽量使目标网站不会封禁我们的IP，我们需要如下几种方法去配置爬虫</p>
 <ol>
 <li><p>禁用cookie,在项目配置文件settings.py中添加</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">COOKIES_ENABLED</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
@@ -403,368 +150,100 @@
 <p> 注意：<br> 如果要爬取目标的URL为http，那么代理ip选择http协议的，否则，代理ip选择https协议的。</p>
 </li>
 </ol>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>通过本次scrapy的学习，了解到了scrapy 运行机制。简述此过程Scheduler用于存储URL，它将URL传递给Downloader，Downloader请求URL，并将响应传递给Spiders，Spiders有两个主要作用1.对信息进行采集，并传递给Item Pipelines去处理 2.将下一次要请求的URL加入到Scheduler中。附上一张图，供学习使用:<br><img src="/images/scrapy3.png" alt=""><br>有时候用scrapy爬取的数据过多，导致ip被封禁，所以我们要对爬虫的属性进行配置，也就是说编辑settings.py文件，此外还可以设置ip池，和动态分配UA来反反爬虫。<br>更多的scrapy使用技巧会在之后学以致用。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>通过本次scrapy的学习，了解到了scrapy 运行机制。简述此过程Scheduler用于存储URL，它将URL传递给Downloader，Downloader请求URL，并将响应传递给Spiders，Spiders有两个主要作用1.对信息进行采集，并传递给Item Pipelines去处理 2.将下一次要请求的URL加入到Scheduler中。附上一张图，供学习使用:<br><img src="/images/scrapy3.png" alt=""><br>有时候用scrapy爬取的数据过多，导致ip被封禁，所以我们要对爬虫的属性进行配置，也就是说编辑settings.py文件，此外还可以设置ip池，和动态分配UA来反反爬虫。<br>更多的scrapy使用技巧会在之后学以致用。</p>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
+    </section>
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
-          
-            <a href="/tags/Python/" rel="tag"># Python</a>
-          
-            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
-          
-            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
-          
-            <a href="/tags/链家网/" rel="tag"># 链家网</a>
-          
-        </div>
-      
-
-      
+      <section class="author">
+    <h4>The One</h4>
+    <p>your life. your learning. your way.</p>
+    
+    <div class="author-meta">
+      <span class="author-location icon-location">Earth</span>
+      <span class="author-link icon-link"><a href="https://zjhdota.github.io">https://zjhdota.github.io</a></span>
+    
+      <section>
         
-      
+          <a href="https://github.com/zjhdota" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/07/获取支付宝订单，并存储的数据库/" rel="next" title="Python爬虫模拟登录支付宝并获取订单信息">
-                <i class="fa fa-chevron-left"></i> Python爬虫模拟登录支付宝并获取订单信息
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/02/14/分布式部署Pyspider/" rel="prev" title="分布式部署PySpider">
-                分布式部署PySpider <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2017/07/11/scrapy-爬取链家网租房信息/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
     </footer>
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
+  <nav class="pagination" role="pagination">
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="The One" />
-          <p class="site-author-name" itemprop="name">The One</p>
-           
-              <p class="site-description motion-element" itemprop="description">your life. your learning. your way.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本机主要运行环境"><span class="nav-number">1.</span> <span class="nav-text">本机主要运行环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装scrapy"><span class="nav-number">2.</span> <span class="nav-text">安装scrapy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初步了解scrapy"><span class="nav-number">3.</span> <span class="nav-text">初步了解scrapy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写爬虫"><span class="nav-number">4.</span> <span class="nav-text">编写爬虫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#优化爬虫"><span class="nav-number">5.</span> <span class="nav-text">优化爬虫</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">The One</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+  <a class="newer-posts" href="/2018/02/14/分布式部署Pyspider/" title="分布式部署PySpider">
+    ← Newer Post
   </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2017/07/07/获取支付宝订单，并存储的数据库/" title="Python爬虫模拟登录支付宝并获取订单信息">
+      Older Post →
+  </a>
+  
+</nav>
 
   
+</div>
 
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">Nameless</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    var wrapAll = function(q) {
+      $(q).each( function() {
+        var $img = $(this),
+            href = $img.attr('src');
+        $img.wrap('<a rel="fancybox" href="' + href + '" title="' + $img.attr('alt') + '" class="link"></a>');
+      });
+    };
+    wrapAll('.post-content img');
+    wrapAll('.post-excerpt img');
+    $('[rel="fancybox"]').fancybox();
+  })(jQuery);
 </script>
 
 
 
 
-
-
-
-
-
-  
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="true"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-  
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  
 
 </body>
 </html>

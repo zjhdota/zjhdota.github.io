@@ -1,731 +1,212 @@
-<!doctype html>
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
 
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="学习笔记,Python,爬虫,暴走漫画," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/g">
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>Python爬虫爬取暴走漫画官网GIF图 | Nameless</title>
+  <meta name="description" content="If you want something you've never had, then you've got to do something you've never done." />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/">
 <meta name="keywords" content="学习笔记,Python,爬虫,暴走漫画">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python爬虫爬取暴走漫画官网GIF图">
 <meta property="og:url" content="http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/index.html">
 <meta property="og:site_name" content="Nameless">
-<meta property="og:description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/g">
+<meta property="og:description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-13T22:06:04.000Z">
+<meta property="og:updated_time" content="2018-02-18T03:02:29.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python爬虫爬取暴走漫画官网GIF图">
-<meta name="twitter:description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/g">
+<meta name="twitter:description" content="爬取需要工具及运行环境 Python3.6 BeautifulSoup4 库 urllib.request 库 Chrome 浏览器   分析需要解析的的URL 进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”http://baozoumanhua.com/catalogs/gif“点击下一页获取URL信息为“http://baozoumanhua.com/catalogs/">
+  <!-- build:css css/screen.css -->
 
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/"/>
-
-
-
-
-
-  <title> Python爬虫爬取暴走漫画官网GIF图 | Nameless </title>
+  <link rel="stylesheet" href="/css/screen.css">
+  
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  
+  <!-- endbuild -->
+  
+  <!-- build:css fancybox/jquery.fancybox.css -->
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+  <!-- endbuild -->
+  
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+  <meta name="generator" content="Nameless">
+  
+  
+  <link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="atom.xml">
+  
+  
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
+<body class="post-template">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
+  <header class="main-header post-head no-cover" >
+    <nav class="main-nav  clearfix">
+        
+        <a class="back-button icon-arrow-left" href="/">Home</a>
+        <a class="subscribe-button icon-feed" href="/atom.xml">Subscribe</a>
+    </nav>
     
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Nameless</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">If you want something you've never had, then you've got to do something you've never done.</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
+    <a class="scroll-down icon-arrow-left" href="#content" data-offset="-45"><span class="hidden">Scroll Down</span></a>
+</header>
 
   
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-    </ul>
+<main id="content" class="content" role="main">
+  <article class="post" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name">Python爬虫爬取暴走漫画官网GIF图</h1>
+      <section class="post-meta">
+  <time datetime="2017-05-03T00:16:13.000Z" itemprop="datePublished" class="post-date">
+      2017-05-03
+  </time>
   
-
   
-</nav>
+  on 
+  <a href='/tags/学习笔记/'>学习笔记</a>,
+  
+  <a href='/tags/Python/'>Python</a>,
+  
+  <a href='/tags/爬虫/'>爬虫</a>,
+  
+  <a href='/tags/暴走漫画/'>暴走漫画</a>
+  
+  
+</section>
 
-
-
- </div>
     </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="The One">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nameless">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Python爬虫爬取暴走漫画官网GIF图
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-03T08:16:13+08:00">
-                2017-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">Python 爬虫</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
+    <section class="post-content" itemprop="description articleBody">
       
 
       
-        <h1 id="爬取需要工具及运行环境"><a href="#爬取需要工具及运行环境" class="headerlink" title="爬取需要工具及运行环境"></a>爬取需要工具及运行环境</h1><ul>
+      <section class="post-updated">
+  Last updated on <time datetime="2018-02-18T03:02:29.309Z" itemprop="dateModified">
+      2018-02-18
+  </time>
+</section>
+
+      
+      <hr>
+<h4 id="爬取需要工具及运行环境"><a href="#爬取需要工具及运行环境" class="headerlink" title="爬取需要工具及运行环境"></a>爬取需要工具及运行环境</h4><ul>
 <li>Python3.6</li>
 <li>BeautifulSoup4 库</li>
 <li>urllib.request 库</li>
 <li>Chrome 浏览器</li>
 </ul>
 <hr>
-<h1 id="分析需要解析的的URL"><a href="#分析需要解析的的URL" class="headerlink" title="分析需要解析的的URL"></a>分析需要解析的的URL</h1><ul>
+<h4 id="分析需要解析的的URL"><a href="#分析需要解析的的URL" class="headerlink" title="分析需要解析的的URL"></a>分析需要解析的的URL</h4><ul>
 <li>进入暴走漫画官网，进入“趣图-GIF怪兽首页”，可获取URL信息为”<a href="http://baozoumanhua.com/catalogs/gif" target="_blank" rel="noopener">http://baozoumanhua.com/catalogs/gif</a>“<br>点击下一页获取URL信息为“<a href="http://baozoumanhua.com/catalogs/gif?page=2&amp;sv=1493773501”" target="_blank" rel="noopener">http://baozoumanhua.com/catalogs/gif?page=2&amp;sv=1493773501”</a><br>找到规律，只改变 page=2 这个数字就行<br>2017.5.4<br><del><strong>注意“sv=1493773501”这个数值可能会变,不同时请做相应修改</strong></del><br>url不加”sv=1493773501”也可以跳转</li>
 </ul>
-<h2 id="请求代码"><a href="#请求代码" class="headerlink" title="请求代码"></a>请求代码</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urls = <span class="keyword">set</span>() # 建立储存需要爬取的<span class="keyword">URL</span>集合</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rang(<span class="number">1</span>, <span class="number">3</span>):</span><br><span class="line">    <span class="keyword">url</span> = <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + <span class="keyword">str</span>(i) # 获取<span class="keyword">URL</span></span><br><span class="line">    urls.add(<span class="keyword">url</span>) # 将<span class="keyword">URL</span>添加到待爬取的<span class="keyword">URL</span>集合中</span><br></pre></td></tr></table></figure>
+<h5 id="请求代码"><a href="#请求代码" class="headerlink" title="请求代码"></a>请求代码</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urls = <span class="keyword">set</span>() # 建立储存需要爬取的<span class="keyword">URL</span>集合</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> rang(<span class="number">1</span>, <span class="number">3</span>):</span><br><span class="line">    <span class="keyword">url</span> = <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + <span class="keyword">str</span>(i) # 获取<span class="keyword">URL</span></span><br><span class="line">    urls.add(<span class="keyword">url</span>) # 将<span class="keyword">URL</span>添加到待爬取的<span class="keyword">URL</span>集合中</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="分析图片规律"><a href="#分析图片规律" class="headerlink" title="分析图片规律"></a>分析图片规律</h1><ul>
+<h4 id="分析图片规律"><a href="#分析图片规律" class="headerlink" title="分析图片规律"></a>分析图片规律</h4><ul>
 <li>右键需要爬取的图片，点击“检查”，发现动图分为两种，一种是标签”video“中的 “data-original-image-url”属性存放图片的URL连接，还有一种是“img”标签下的“data-original-image-url”属性存放图片URL连接</li>
 </ul>
-<h2 id="解析的代码"><a href="#解析的代码" class="headerlink" title="解析的代码"></a>解析的代码</h2><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">res_data = [] <span class="comment"># 存放图片的URL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟浏览器</span></span><br><span class="line">user_agent = <span class="string">'Mozilla/5.0 (X11; linux x86_64) AppleWebKit/537.36'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从URL集合中取出一个URL，进行请求解析</span></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> <span class="symbol">urls:</span></span><br><span class="line">    <span class="comment"># 下载页面</span></span><br><span class="line">    req = urllib.request.Request(url, headers = headers)</span><br><span class="line">    response = urllib.request.urlopen(req)</span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>) <span class="comment"># 将代码格式化为UTF-8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用beautifulsoup 对 html 进行解析</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">'html.parse'</span>)</span><br><span class="line">    gif1s = soup.findAll(<span class="string">'video'</span>，<span class="keyword">class</span><span class="number">_</span>=<span class="string">"lazy"</span>) <span class="comment"># 获取相关的&lt;video&gt; 标签信息</span></span><br><span class="line">	gif2s = soup.findAll(<span class="string">'img'</span>, <span class="keyword">class</span><span class="number">_</span><span class="string">"lazy"</span>) <span class="comment"># 获取相关&lt;img&gt; 标签信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将图片的URL 存放到res_data列表中</span></span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>] <span class="keyword">for</span> gif <span class="keyword">in</span> gif1s]</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>] <span class="keyword">for</span> gif <span class="keyword">in</span> gif2s]</span><br></pre></td></tr></table></figure>
+<h5 id="解析的代码"><a href="#解析的代码" class="headerlink" title="解析的代码"></a>解析的代码</h5><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">res_data = [] <span class="comment"># 存放图片的URL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟浏览器</span></span><br><span class="line">user_agent = <span class="string">'Mozilla/5.0 (X11; linux x86_64) AppleWebKit/537.36'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从URL集合中取出一个URL，进行请求解析</span></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> <span class="symbol">urls:</span></span><br><span class="line">    <span class="comment"># 下载页面</span></span><br><span class="line">    req = urllib.request.Request(url, headers = headers)</span><br><span class="line">    response = urllib.request.urlopen(req)</span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>) <span class="comment"># 将代码格式化为UTF-8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 使用beautifulsoup 对 html 进行解析</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">'html.parse'</span>)</span><br><span class="line">    gif1s = soup.findAll(<span class="string">'video'</span>，<span class="keyword">class</span><span class="number">_</span>=<span class="string">"lazy"</span>) <span class="comment"># 获取相关的&lt;video&gt; 标签信息</span></span><br><span class="line">	gif2s = soup.findAll(<span class="string">'img'</span>, <span class="keyword">class</span><span class="number">_</span><span class="string">"lazy"</span>) <span class="comment"># 获取相关&lt;img&gt; 标签信息</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将图片的URL 存放到res_data列表中</span></span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>] <span class="keyword">for</span> gif <span class="keyword">in</span> gif1s]</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>] <span class="keyword">for</span> gif <span class="keyword">in</span> gif2s]</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="下载图片"><a href="#下载图片" class="headerlink" title="下载图片"></a>下载图片</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(len(res_data)):</span><br><span class="line">    filename = str(i) + <span class="string">'.gif'</span></span><br><span class="line">    urllib<span class="selector-class">.request</span><span class="selector-class">.urlretrieve</span>(res_data[i], <span class="string">'../bzmh/download_gif/'</span> + filename)</span><br></pre></td></tr></table></figure>
+<h4 id="下载图片"><a href="#下载图片" class="headerlink" title="下载图片"></a>下载图片</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> range(len(res_data)):</span><br><span class="line">    filename = str(i) + <span class="string">'.gif'</span></span><br><span class="line">    urllib<span class="selector-class">.request</span><span class="selector-class">.urlretrieve</span>(res_data[i], <span class="string">'../bzmh/download_gif/'</span> + filename)</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">import urllib.request</span><br><span class="line"><span class="keyword">from</span> bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">urls = <span class="keyword">set</span>() <span class="meta"># 存放待爬取的URL集合</span></span><br><span class="line">res_data = [] <span class="meta"># 存放已经爬取的图片URL列表</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 指定需要爬取的页面数, 并加入到URL集合中</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params"><span class="number">1</span>, <span class="number">3</span></span>):</span></span><br><span class="line"><span class="function">    url </span>= <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + str(i)</span><br><span class="line">    urls.<span class="keyword">add</span>(url)</span><br><span class="line"></span><br><span class="line"><span class="meta"># 模拟浏览器</span></span><br><span class="line">user_agent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta"># 从URL集合中取出一个URL进行解析</span></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">    req = urllib.request.Request(url, headers=headers)</span><br><span class="line">    response = urllib.request.urlopen(req)</span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>) <span class="meta"># 格式化编码为UTF-8</span></span><br><span class="line">    <span class="meta"># 对HTML页面进行解析</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">'html.parser'</span>)</span><br><span class="line">    gif1s = soup.findAll(<span class="string">'video'</span>, style=<span class="string">'width: 500px; height: 500px;'</span>) <span class="meta"># 获取相关“video” 标签的信息</span></span><br><span class="line">    gif2s = soup.findAll(<span class="string">'img'</span>, class_=<span class="string">'lazy'</span>) <span class="meta"># 获取相关“img” 标签的信息</span></span><br><span class="line">    <span class="meta"># 将图片的URL存放到图片URL列表中</span></span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif1s]</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif2s]</span><br><span class="line"></span><br><span class="line"><span class="meta"># 下载图片</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params">len(res_data</span>)):</span></span><br><span class="line"><span class="function">    filename </span>= str(i) + <span class="string">".gif"</span></span><br><span class="line">    urllib.request.urlretrieve(res_data[i], <span class="string">'../bzmh/download_gif/'</span> + filename)</span><br></pre></td></tr></table></figure>
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line">import urllib.request</span><br><span class="line"><span class="keyword">from</span> bs4 import BeautifulSoup</span><br><span class="line"></span><br><span class="line">urls = <span class="keyword">set</span>() <span class="meta"># 存放待爬取的URL集合</span></span><br><span class="line">res_data = [] <span class="meta"># 存放已经爬取的图片URL列表</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 指定需要爬取的页面数, 并加入到URL集合中</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params"><span class="number">1</span>, <span class="number">3</span></span>):</span></span><br><span class="line"><span class="function">    url </span>= <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + str(i)</span><br><span class="line">    urls.<span class="keyword">add</span>(url)</span><br><span class="line"></span><br><span class="line"><span class="meta"># 模拟浏览器</span></span><br><span class="line">user_agent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta"># 从URL集合中取出一个URL进行解析</span></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">    req = urllib.request.Request(url, headers=headers)</span><br><span class="line">    response = urllib.request.urlopen(req)</span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>) <span class="meta"># 格式化编码为UTF-8</span></span><br><span class="line">    <span class="meta"># 对HTML页面进行解析</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">'html.parser'</span>)</span><br><span class="line">    gif1s = soup.findAll(<span class="string">'video'</span>, style=<span class="string">'width: 500px; height: 500px;'</span>) <span class="meta"># 获取相关“video” 标签的信息</span></span><br><span class="line">    gif2s = soup.findAll(<span class="string">'img'</span>, class_=<span class="string">'lazy'</span>) <span class="meta"># 获取相关“img” 标签的信息</span></span><br><span class="line">    <span class="meta"># 将图片的URL存放到图片URL列表中</span></span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif1s]</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif2s]</span><br><span class="line"></span><br><span class="line"><span class="meta"># 下载图片</span></span><br><span class="line"><span class="function"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="title">range</span>(<span class="params">len(res_data</span>)):</span></span><br><span class="line"><span class="function">    filename </span>= str(i) + <span class="string">".gif"</span></span><br><span class="line">    urllib.request.urlretrieve(res_data[i], <span class="string">'../bzmh/download_gif/'</span> + filename)</span><br></pre></td></tr></table></figure>
 <p>2017.5.4<br>完善代码增加交互式<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> urllib.request</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line">urls = set() <span class="comment"># 存放需要爬取的URL集合</span></span><br><span class="line">res_data = [] <span class="comment"># 存放需要爬取的图片的URL</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获得要爬取的范围</span></span><br><span class="line">print(<span class="string">'请输入要爬取的页面范围\n例：输入1 2，则爬取第1页和第2页的图片'</span>)</span><br><span class="line">print(<span class="string">'请输入首页'</span>)</span><br><span class="line">front_page = input()</span><br><span class="line">print(<span class="string">'请输入尾页'</span>)</span><br><span class="line">back_page = input()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取需要爬取的URL</span></span><br><span class="line"><span class="keyword">if</span> front_page == back_page:</span><br><span class="line">    url = <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + front_page</span><br><span class="line">    urls.add(url)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(int(front_page), int(back_page)+<span class="number">1</span>):</span><br><span class="line">        url = <span class="string">'http://baozoumanhua.com/catalogs/gif?page='</span> + str(i)</span><br><span class="line">        urls.add(url)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟浏览器</span></span><br><span class="line">user_agent = <span class="string">'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36'</span></span><br><span class="line">headers = &#123;<span class="string">'User-Agent'</span>: user_agent&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从URL集合中，取出一个URL进行解析</span></span><br><span class="line"><span class="keyword">for</span> url <span class="keyword">in</span> urls:</span><br><span class="line">    req = urllib.request.Request(url, headers=headers) <span class="comment"># 请求页面</span></span><br><span class="line">    response = urllib.request.urlopen(req) <span class="comment"># 下载页面</span></span><br><span class="line">    html = response.read().decode(<span class="string">'utf-8'</span>) <span class="comment"># 编码格式化为UTF-8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解析页面</span></span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">'html.parser'</span>)</span><br><span class="line">    gif1s = soup.findAll(<span class="string">'video'</span>, style=<span class="string">'width: 500px; height: 500px;'</span>)</span><br><span class="line">    gif2s = soup.findAll(<span class="string">'img'</span>, class_=<span class="string">'lazy'</span>)</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif1s]</span><br><span class="line">    res_data += [gif[<span class="string">'data-original-image-url'</span>]<span class="keyword">for</span> gif <span class="keyword">in</span> gif2s]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在当前目录下，建立存储gif图片的文件夹</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(<span class="string">'./download_gif'</span>):</span><br><span class="line">    os.mkdir(<span class="string">'download_gif'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载图片</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(res_data)):</span><br><span class="line">    filename = str(i) + <span class="string">".gif"</span></span><br><span class="line">    urllib.request.urlretrieve(res_data[i], <span class="string">'./download_gif/'</span> + filename)</span><br></pre></td></tr></table></figure></p>
 <hr>
 
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-
+    </section>
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/学习笔记/" rel="tag"># 学习笔记</a>
-          
-            <a href="/tags/Python/" rel="tag"># Python</a>
-          
-            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
-          
-            <a href="/tags/暴走漫画/" rel="tag"># 暴走漫画</a>
-          
-        </div>
-      
-
-      
+      <section class="author">
+    <h4>The One</h4>
+    <p>your life. your learning. your way.</p>
+    
+    <div class="author-meta">
+      <span class="author-location icon-location">Earth</span>
+      <span class="author-link icon-link"><a href="https://zjhdota.github.io">https://zjhdota.github.io</a></span>
+    
+      <section>
         
-      
+          <a href="https://github.com/zjhdota" class="author-social">github</a>
+        
+      </section>
+    </div>
+</section>
 
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/05/02/python-爬虫爬取暴走漫画官网-jpg图片/" rel="next" title="Python 爬虫爬取暴走漫画官网 jpg图片">
-                <i class="fa fa-chevron-left"></i> Python 爬虫爬取暴走漫画官网 jpg图片
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/05/python-模拟登录pixiv/" rel="prev" title="Python爬虫模拟登录pixiv">
-                Python爬虫模拟登录pixiv <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
+      <section class="share">
+    <h4>Share this post</h4>
+    <a class="icon-twitter" href="http://twitter.com/share?url=http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/"
+       onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+        <span class="hidden">Twitter</span>
+    </a>
+    <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/"
+       onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+        <span class="hidden">Facebook</span>
+    </a>
+    <a class="icon-google-plus" href="https://plus.google.com/share?url=http://yoursite.com/2017/05/03/python爬虫爬取暴走漫画官网GIF图/"
+       onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+        <span class="hidden">Google+</span>
+    </a>
+</section>
     </footer>
   </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-          
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
+  <nav class="pagination" role="pagination">
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="The One" />
-          <p class="site-author-name" itemprop="name">The One</p>
-           
-              <p class="site-description motion-element" itemprop="description">your life. your learning. your way.</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">21</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#爬取需要工具及运行环境"><span class="nav-number">1.</span> <span class="nav-text">爬取需要工具及运行环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析需要解析的的URL"><span class="nav-number">2.</span> <span class="nav-text">分析需要解析的的URL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#请求代码"><span class="nav-number">2.1.</span> <span class="nav-text">请求代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析图片规律"><span class="nav-number">3.</span> <span class="nav-text">分析图片规律</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#解析的代码"><span class="nav-number">3.1.</span> <span class="nav-text">解析的代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下载图片"><span class="nav-number">4.</span> <span class="nav-text">下载图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完整代码"><span class="nav-number">5.</span> <span class="nav-text">完整代码</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2018</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">The One</span>
-</div>
-
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
+  <a class="newer-posts" href="/2017/05/05/python-模拟登录pixiv/" title="Python爬虫模拟登录pixiv">
+    ← Newer Post
   </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-    
-  </div>
+  
+  <span class="page-number">•</span>
+  
+  <a class="older-posts" href="/2017/05/02/python-爬虫爬取暴走漫画官网-jpg图片/" title="Python 爬虫爬取暴走漫画官网 jpg图片">
+      Older Post →
+  </a>
+  
+</nav>
 
   
+</div>
 
+</main>
+
+
+  <footer class="site-footer clearfix">
+ <section class="copyright"><a href="/">Nameless</a> &copy; 2015 &bull; All rights reserved.</section>
+ <section class="poweredby">Proudly published with <a class="icon-ghost" href="http://zespia.tw/hexo/"> Hexo</a></section>
+</footer>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-2.0.3.min.js"><\/script>')</script>
+
+<script type="text/javascript" src="/js/jquery.fitvids.js"></script>
 <script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+(function($){
+  var $postContent = $(".post-content");
+  $postContent.fitVids();
+})(jQuery);
+</script>
+
+<script type="text/javascript" src="/js/index.js"></script>
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+  (function($){
+    var wrapAll = function(q) {
+      $(q).each( function() {
+        var $img = $(this),
+            href = $img.attr('src');
+        $img.wrap('<a rel="fancybox" href="' + href + '" title="' + $img.attr('alt') + '" class="link"></a>');
+      });
+    };
+    wrapAll('.post-content img');
+    wrapAll('.post-excerpt img');
+    $('[rel="fancybox"]').fancybox();
+  })(jQuery);
 </script>
 
 
 
 
-
-
-
-
-
-  
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="true"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-  
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  
 
 </body>
 </html>
